@@ -22,30 +22,11 @@ Porting Notes
 -------------
 Anyone trying to use this filebrowser with S3 must use the settings as follows:
 
-```python
-if not os.environ.has_key('DATABASE_URL'):
-    os.environ['DATABASE_URL'] = '< your database url here >'
-    MEDIA_ROOT = '< abs path to your local media root >'
-    STATIC_ROOT = ''
-    STATIC_URL = '/static/'
-else:
-    DEFAULT_FILE_STORAGE = 'shopcraft.s3utils.MediaRootS3BotoStorage'
-    STATICFILES_STORAGE = 'shopcraft.s3utils.StaticRootS3BotoStorage'
-    AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID']
-    AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
-    AWS_STORAGE_BUCKET_NAME = os.environ['S3_BUCKET_NAME']
-    MEDIA_ROOT = ''
-    STATIC_ROOT = '/static/'
-    STATIC_URL = '//%s.s3.amazonaws.com/static/' % AWS_STORAGE_BUCKET_NAME
-    MEDIA_URL = '//%s.s3.amazonaws.com/media/' % AWS_STORAGE_BUCKET_NAME
-    ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
-
-DATABASES = {'default': dj_database_url.config(default=os.environ['DATABASE_URL'])}
-```
+settings.py is `here <https://gist.github.com/knarfytrebil/6937677>`_
 
 AND
 
-s3utils.py is `here <https://gist.github.com/knarfytrebil/6937524>`
+s3utils.py is `here <https://gist.github.com/knarfytrebil/6937524>`_
 
 Documentation
 -------------
