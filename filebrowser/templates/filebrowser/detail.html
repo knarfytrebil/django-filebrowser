@@ -5,33 +5,22 @@
 {% load url from future %}
 
 <!-- STYLESHEETS -->
-{% block stylesheets %}
+{% block extrastyle %}
     {{ block.super }}
-    <link rel="stylesheet" type="text/css" href="{% static "filebrowser/css/filebrowser.css" %}" />
+    <link rel="stylesheet" type="text/css" href="{% static "filebrowser/css/suit-filebrowser.css" %}" />
+    <link rel="stylesheet" type="text/css" href="{% static "filebrowser/css/screen.css" %}" />
 {% endblock %}
 
 <!-- JAVASCRIPTS -->
-{% block javascripts %}
+{% block extrahead%}
     {{ block.super }}
-    <script type="text/javascript">
+<script type="text/javascript" charset="utf-8">
     (function($){
         $(document).ready(function() {
-            $("div#grp-content-container .grp-collapse").grp_collapsible({
-                on_init: function(elem, options) {
-                    // open collapse (and all collapse parents) in case of errors
-                    if (elem.find("ul.grp-errorlist").length > 0) {
-                        elem.removeClass("grp-closed")
-                            .addClass("grp-open");
-                        elem.parents(".grp-collapse")
-                            .removeClass("grp-closed")
-                            .addClass("grp-open");
-                    }
-                }
-            });
+            $("#FULTOOL").remove()
         });
-    })(grp.jQuery);
-    </script>
-    {{ media }}
+    })(Suit.$.noConflict()); 
+</script>
 {% endblock %}
 
 <!-- COLTYPE/BODYCLASS -->
@@ -167,7 +156,7 @@
         <footer class="grp-module grp-submit-row grp-fixed-footer">
             <header style="display:none"><h1>Submit Options</h1></header>
             <ul>
-                <li class="grp-float-left"><a href="{% url 'filebrowser:fb_delete_confirm' %}{% query_string %}" class="grp-button grp-delete-link">{% trans "Delete" %}</a></li>
+                <li class="grp-float-left"><a href="{% url 'fb_delete_confirm' %}{% query_string %}" class="grp-button grp-delete-link">{% trans "Delete" %}</a></li>
                 <li><input type="submit" value="{% trans 'Save' %}" class="grp-button grp-default" /></li>
                 <li><input type="submit" value="{% trans 'Save and continue editing' %}" class="grp-button" name="_continue" /></li>
             </ul>

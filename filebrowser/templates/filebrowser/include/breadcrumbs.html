@@ -1,27 +1,37 @@
 {% load i18n fb_tags %}
 {% load url from future %}
 
-<ul class="grp-horizontal-list">
+<ul class="breadcrumb">
     {% if not query.pop %}
         <li><a href="../../">{% trans "Home" %}</a></li>
+        <span class="divider">»</span>
     {% endif %}
     {% if breadcrumbs or breadcrumbs_title %}
-        <li><a href="{% url 'filebrowser:fb_browse' %}{% query_string "" "q,dir,filename,p" %}">{% trans 'FileBrowser' %}</a></li>
+        <li><a href="{% url 'fb_browse' %}{% query_string "" "q,dir,filename,p" %}">{% trans 'FileBrowser' %}</a></li>
+        <span class="divider">»</span>
     {% else %}
         <li>{% trans 'FileBrowser' %}</li>
     {% endif %}
     {% for item in breadcrumbs %}
         {% if not forloop.last %}
-            <li><a href="{% url 'filebrowser:fb_browse' %}{% query_string "" "q,dir,filename,p" %}&amp;dir={{ item.1|urlencode }}">{{ item.0 }}</a></li>
+            <li><a href="{% url 'fb_browse' %}{% query_string "" "q,dir,filename,p" %}&amp;dir={{ item.1|urlencode }}">{{ item.0 }}</a></li>
+            <span class="divider">»</span>
         {% else %}
             {% if breadcrumbs_title %}
-                <li><a href="{% url 'filebrowser:fb_browse' %}{% query_string "" "q,dir,filename,p" %}&amp;dir={{ item.1|urlencode }}">{{ item.0 }}</a></li>
+                <li><a href="{% url 'fb_browse' %}{% query_string "" "q,dir,filename,p" %}&amp;dir={{ item.1|urlencode }}">{{ item.0 }}</a></li>
             {% else %}
                 <li>{{ item.0 }}</li>
             {% endif %}
+            <span class="divider">»</span>
         {% endif %}
     {% endfor %}
     {% if breadcrumbs_title %}
         <li>{{ breadcrumbs_title }}</li>
+        <span class="divider">»</span>
     {% endif %}
+</ul>
+
+<ul class="breadcrumb" id="FULTOOL">
+        <li><a href="{% url 'fb_createdir' %}{% query_string '' 'p' %}" class="btn">{% trans "New Folder" %}</a></li>
+        <li><a href="{% url 'fb_upload' %}{% query_string '' 'p' %}" class="btn btn-success">{% trans "Upload" %}</a></li>
 </ul>

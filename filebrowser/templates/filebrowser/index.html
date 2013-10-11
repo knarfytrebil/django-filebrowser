@@ -5,13 +5,14 @@
 {% load url from future %}
 
 <!-- STYLESHEETS -->
-{% block stylesheets %}
+{% block extrastyle %}
     {{ block.super }}
-    <link rel="stylesheet" type="text/css" href="{% static "filebrowser/css/filebrowser.css" %}" />
+    <link rel="stylesheet" type="text/css" href="{% static "filebrowser/css/suit-filebrowser.css" %}" />
+    <link rel="stylesheet" type="text/css" href="{% static "filebrowser/css/screen.css" %}" />
 {% endblock %}
 
 <!-- JAVASCRIPTS -->
-{% block javascripts %}
+{% block extrahead %}
     {{ block.super }}
     {% ifequal query.pop '1' %} <!-- FileBrowseField -->
     <script language="javascript" type="text/javascript" src="{% static "filebrowser/js/FB_FileBrowseField.js" %}"></script>
@@ -28,10 +29,9 @@
     <script type="text/javascript" charset="utf-8">
         (function($) {
             $(document).ready(function() {
-                grappelli.initSearchbar();
-                grappelli.initFilter();
+
             });
-        })(grp.jQuery);
+        })(Suit.$.noConflict());
     </script>
     <script type="text/javascript" charset="utf-8">
         (function($) {
@@ -63,7 +63,7 @@
                     }
                 });
             });
-        })(grp.jQuery);
+        })(Suit.$.noConflict());
     </script>
 {% endblock %}
 
@@ -84,10 +84,9 @@
 
 <!-- CONTENT -->
 {% block content %}
-    <div class="grp-module grp-changelist-filters">
+<!--     <div class="grp-module grp-changelist-filters">
         <div class="grp-row">
             <div class="l-2cr-fluid l-d-12">
-                <!-- SEARCH -->
                 <aside class="c-1">
                     <header style="display:none"><h1>Search</h1></header>
                     <div id="search" class="g-d-6">
@@ -104,16 +103,14 @@
                             <button class="grp-search-button" type="submit" value="">&nbsp;</button>
                         </form>
                     </div>
-                    <!-- FILTERS -->
                     {% include "filebrowser/include/filter.html" %}
                 </aside>
                 <div class="c-2">
-                    <!-- PAGINATION -->
                     {% pagination %}
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <section id="grp-changelist">
         <header style="display:none"><h1>Results</h1></header>
         <!-- RESULTS -->

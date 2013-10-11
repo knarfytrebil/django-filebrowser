@@ -14,6 +14,7 @@ from django.core.files import File
 from filebrowser.settings import VERSIONS
 from filebrowser.base import FileObject
 from filebrowser.sites import get_default_site
+from filebrowser.urls import site as this_site
 register = Library()
 
 
@@ -36,7 +37,8 @@ class VersionNode(Node):
             source = source.name
         else: # string
             source = source
-        site = context.get('filebrowser_site', get_default_site())
+        # site = context.get('filebrowser_site', get_default_site())
+        site = context.get('filebrowser_site', this_site)
         fileobject = FileObject(source, site=site)
         try:
             version = fileobject.version_generate(version_suffix)
@@ -83,7 +85,8 @@ class VersionObjectNode(Node):
             source = source.name
         else: # string
             source = source
-        site = context.get('filebrowser_site', get_default_site())
+        site = context.get('filebrowser_site', this_site)
+        # site = context.get('filebrowser_site', get_default_site())
         fileobject = FileObject(source, site=site)
         try:
             version = fileobject.version_generate(version_suffix)

@@ -5,15 +5,23 @@
 {% load url from future %}
 
 <!-- STYLESHEETS -->
-{% block stylesheets %}
+{% block extrastyle %}
     {{ block.super }}
-    <link rel="stylesheet" type="text/css" href="{% static "filebrowser/css/filebrowser.css" %}" />
+    <link rel="stylesheet" type="text/css" href="{% static "filebrowser/css/suit-filebrowser.css" %}" />
+    <link rel="stylesheet" type="text/css" href="{% static "filebrowser/css/screen.css" %}" />
 {% endblock %}
 
 <!-- JAVASCRIPTS -->
-{% block javascripts %}
+{% block extrahead %}
     {{ block.super }}
     {{ media }}
+<script type="text/javascript" charset="utf-8">
+    (function($){
+        $(document).ready(function() {
+            $("#FULTOOL").remove()
+        });
+    })(Suit.$.noConflict()); 
+</script>
 {% endblock %}
 
 <!-- COLTYPE/BODYCLASS -->
@@ -27,7 +35,7 @@
 {% block content %}
     <div class="g-d-c">
         <div class="grp-group">
-            <h2>{% blocktrans with fileobject.filename as escaped_object %}Are you sure you want to delete "{{ escaped_object }}"? All of the following items will be deleted:{% endblocktrans %}</h2>
+            <h2 style="margin:0px;">{% blocktrans with fileobject.filename as escaped_object %}Are you sure you want to delete "{{ escaped_object }}"? All of the following items will be deleted:{% endblocktrans %}</h2>
             <ul class="grp-nested-list">
                 <li>{{ fileobject.filename }}</li>
             </ul>
@@ -47,8 +55,8 @@
         <footer class="grp-module grp-submit-row grp-fixed-footer">
             <header style="display:none"><h1>Submit Options</h1></header>
             <ul {% if is_popup %}style="overflow: auto;"{% endif %}>
-                <li class="grp-float-left"><a href="{% url 'filebrowser:fb_detail' %}{% query_string %}" class="grp-button grp-cancel-link">{% trans "Cancel" %}</a></li>
-                <li><a href="{% url 'filebrowser:fb_delete' %}{% query_string %}" class="grp-button">{% trans "Yes, I'm sure" %}</a></li>
+                <li class="grp-float-left"><a href="{% url 'fb_detail' %}{% query_string %}" class="btn btn-warning">{% trans "Cancel" %}</a></li>
+                <li><a href="{% url 'fb_delete' %}{% query_string %}" class="btn btn-success">{% trans "Yes, I'm sure" %}</a></li>
             </ul>
         </footer>
     </div>
